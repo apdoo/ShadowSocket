@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.hexor.dao.IUserMapper">
+   <sql id="columnUser">
+     user_name,
+     email,
+     pass,
+     passwd,
+     t,
+     u,
+     d,
+     transfer_enable,
+     port,
+     reg_date,
+     server,
+     priv
+	 </sql>
+    <resultMap type="com.hexor.repo.User" id="userResultMap">
+        <id property="uid" column="uid"/>
+        <result property="user_name" column="user_name"/>
+        <result property="email" column="email"/>
+        <result property="pass" column="pass"/>
+        <result property="passwd" column="passwd"/>
+        <result property="t" column="t"/>
+        <result property="u" column="u"/>
+        <result property="d" column="d"/>
+        <result property="transfer_enable" column="transfer_enable"/>
+        <result property="port" column="port"/>
+        <result property="switch_" column="switch"/>
+        <result property="enable" column="enable"/>
+        <result property="type" column="type"/>
+        <result property="last_get_gitf_time" column="last_get_gitf_time"/>
+        <result property="last_rest_pass_time" column="last_rest_pass_time"/>
+        <result property="reg_date" column="reg_date"/>
+        <result property="server" column="server"/>
+        <result property="priv" column="priv"/>
+    </resultMap>
+     <select id="getAllUsers"   resultMap="userResultMap">
+            select * from user
+    </select>
+    <select id="checkLogin" parameterType="com.hexor.repo.User" resultType="com.hexor.repo.User">
+          select * from user where    user_name=#{user_name} and   pass=#{pass}
+    </select>
+    <select id="getMaxProt" resultType="int">
+          select max(port) from user
+    </select>
+    <insert id="insertUser" parameterType="com.hexor.repo.User">
+        insert into user(<include refid="columnUser" />) values(
+          #{user_name},
+          #{email},
+          #{pass},
+          #{passwd},
+          #{t},
+          #{u},
+          #{d},
+          #{transfer_enable},
+          #{port},
+          #{reg_date},
+          #{server},
+          #{priv}
+        )
+    </insert>
+
+    <select id="checkUserExist"  parameterType="String" resultType="com.hexor.repo.User">
+        select * from user where  user_name=#{value}
+    </select>
+
+    <select id="getUserById" parameterType="int" resultType="com.hexor.repo.User">
+        select * from user where uid=#{value}
+    </select>
+
+    <select id="getUsersCount" resultType="long">
+        select count(*) from user
+    </select>
+
+    <select id="limit" parameterType="com.hexor.repo.Pager" resultMap="userResultMap">
+			select * from user order by uid desc limit #{index},#{data}
+    </select>
+
+    <!--更改用户信息-->
+    <update id="updateUser" parameterType="com.hexor.repo.User">
+        update user
+        <set>
+            <if test="server!=null">
+                server=#{server},
+            </if>
+            <if test="pass!=null">
+                pass=#{pass},
+            </if>
+            <if test="passwd!=null">
+                passwd=#{passwd},
+            </if>
+            <if test="transfer_enable!=null">
+                transfer_enable=#{transfer_enable} ,
+            </if>
+            <if test="port!=null">
+                port=#{port}
+            </if>
+        </set>
+        where uid=#{uid}
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        delete from user where uid=#{value}
+    </delete>
+
+    <select id="checkPort" parameterType="int" resultType="com.hexor.repo.User">
+        select * from user where   port=#{port}
+    </select>
+
+    <update id="userTask"  >
+          update user set u=0,d=0
+    </update>
+
+</mapper>

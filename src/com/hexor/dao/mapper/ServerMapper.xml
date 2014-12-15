@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.hexor.dao.IServerMapper">
+   <sql id="columnServer">
+		  ip,
+		  addr,
+		  encryption
+	 </sql>
+    <resultMap type="com.hexor.repo.Server" id="serverResultMap">
+        <id property="id" column="id"/>  
+        <id property="ip" column="ip"/>
+        <id property="addr" column="addr"/>
+        <id property="encryption" column="encryption"/>
+
+    </resultMap>
+     <select id="getAllServer"   resultMap="serverResultMap">
+            select * from server
+    </select>
+    <select id="selectServById" parameterType="String"   resultType="com.hexor.repo.Server">
+           select * from server where id = #{value }
+    </select>
+
+    <select id="getServerCount" resultType="long">
+        select count(*) from server
+    </select>
+
+    <select id="limit" parameterType="com.hexor.repo.Pager" resultMap="serverResultMap">
+			select * from server order by id desc limit #{index},#{data}
+    </select>
+
+    <insert id="insertServer" parameterType="com.hexor.repo.Server" >
+        insert into server(<include refid="columnServer" />) values(
+        #{ip},
+        #{addr},
+        #{encryption}
+        )
+    </insert>
+
+    <update id="updateServer" parameterType="com.hexor.repo.Server">
+        update server
+        <set>
+            <if test="ip!=null">
+                ip=#{ip},
+            </if>
+            <if test="addr!=null">
+                addr=#{addr},
+            </if>
+            <if test="encryption!=null">
+                encryption=#{encryption}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="getServerById" parameterType="int" resultType="com.hexor.repo.Server">
+        select * from server where id=#{value}
+    </select>
+    <delete id="deleteById" parameterType="int">
+        delete from server where id=#{value}
+    </delete>
+ </mapper>

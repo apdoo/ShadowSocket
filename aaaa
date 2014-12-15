@@ -1,0 +1,2 @@
+-----管理员
+insert  into user(uid,user_name,email,pass,passwd,t,u,d,transfer_enable,port,switch,enable,type,last_get_gitf_time,last_rest_pass_time,reg_date,server,priv) values (0,'admin','admin@admin.com','9003d1df22eb4d3820015070385194c8','0000000',1410609560,3,4,30000000000,50000,1,1,7,0,0,'2014-11-07 00:00:00','1,2,3',1);

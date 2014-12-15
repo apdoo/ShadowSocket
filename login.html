@@ -1,0 +1,70 @@
+<html>
+<head>
+ <style>
+.clearfix:before {
+display: table;
+content: "";
+}
+.clearfix:after {
+display: table;
+clear: both;
+content: "";
+}
+body {
+min-width: 1020px;
+font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+color: #333;
+background-color: #fff;
+}
+h1 {
+display: block;
+font-size: 2em;
+-webkit-margin-before: 0.67em;
+-webkit-margin-after: 0.67em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+font-weight: bold;
+}
+.auth-form-body {
+padding: 20px;
+font-size: 14px;
+background-color: #fff;
+border: 1px solid #d8dee2;
+border-top: 0;
+border-radius: 0 0 3px 3px;
+}
+ 
+ </style>
+</head>
+<body>
+<div class="site clearfix">
+          <div id="site-container" class="context-loader-container" data-pjax-container="">
+            
+            
+
+<div class="auth-form" id="login">
+
+    <form accept-charset="UTF-8" action="/session" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="?"><input name="authenticity_token" type="hidden" value="JVvSkqNcing2fuOBRRksQIshpp7QWql+fUMUnbeo0OdW5F1uVGKnvOnX5yC1a7+tRM5TmRNh9D0f75Cdqipgsg=="></div>      <div class="auth-form-header">
+        <h1>Sign in</h1>
+      </div>
+      <div class="auth-form-body">
+        <label for="login_field">
+          Username or Email
+        </label>
+        <input autocapitalize="off" autocorrect="off" autofocus="autofocus" class="input-block" id="login_field" name="login" tabindex="1" type="text">
+
+        <label for="password">
+          Password <a href="/password_reset">(forgot password)</a>
+        </label>
+        <input class="input-block" id="password" name="password" tabindex="2" type="password">
+
+        <input id="return_to" name="return_to" type="hidden" value="/login">                <input class="button" name="commit" tabindex="3" type="submit" value="Sign in">
+      </div>
+</form>
+</div>
+
+          </div>
+          <div class="modal-backdrop"></div>
+        </div>
+</body>
+</html>
